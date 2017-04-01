@@ -13,18 +13,18 @@
 
 
     <Button
-        android:text="Sign In"
+        android:text="Sign In FB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/signIn_button"
         android:onClick="onClickSignIn"/>
 
     <Button
-        android:text="Sign Up"
+        android:text="Sign Out FB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/signUp_button"
-        android:onClick="onClickSignUp"/>
+        android:onClick="onClickSignOut"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
