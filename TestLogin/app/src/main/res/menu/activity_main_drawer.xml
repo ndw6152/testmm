@@ -19,13 +19,9 @@
 
     <group >
         <item
-            android:id="@+id/test"
+            android:id="@+id/nav_sign_out"
             android:icon="@drawable/com_facebook_profile_picture_blank_square"
-            android:title="TEST" />
-        <item
-            android:id="@+id/test2"
-            android:icon="@drawable/messenger_bubble_large_white"
-            android:title="Gallery" />
+            android:title="Sign Out FB" />
 
     </group>
 
@@ -38,7 +34,7 @@
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="Send" />
+                android:title="Settings" />
         </menu>
     </item>
 

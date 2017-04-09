@@ -18,6 +18,7 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
@@ -27,7 +28,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String TAG = "TESTLOGIN_APP";
+    private String TAG = "MainScreen";
     private CallbackManager mFBcallbackManager;
 
     private void initFacebookLoginButton() {
@@ -142,11 +143,23 @@ public class MainActivity extends AppCompatActivity
         {
             case R.id.nav_camera:
                 Toast.makeText(getApplicationContext(), "CAMERA ICON", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.nav_gallery:
                 Toast.makeText(getApplicationContext(), "Gallery Icon", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_sign_out:
+
+                LoginManager.getInstance().logOut();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
             case R.id.nav_slideshow:
+                break;
             case R.id.nav_share:
+                break;
             case R.id.nav_settings:
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
