@@ -22,6 +22,13 @@ public class ProfileEditActivity extends AppCompatActivity {
         return true;
     }
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        showToast("CLOSING");
+        return false;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -36,6 +43,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             case R.id.menu_discard_changes:
                 showToast("Discard profile");
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -50,6 +58,8 @@ public class ProfileEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
 
+        this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.com_facebook_tooltip_black_xout);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 }
