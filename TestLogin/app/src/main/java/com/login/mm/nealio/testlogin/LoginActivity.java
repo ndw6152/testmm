@@ -2,11 +2,7 @@ package com.login.mm.nealio.testlogin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.facebook.CallbackManager;
@@ -44,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private void initFacebookLoginButton() {
 
         // using default fb button for login
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.button_login);
         loginButton.setReadPermissions();
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "user_birthday", "user_likes"));

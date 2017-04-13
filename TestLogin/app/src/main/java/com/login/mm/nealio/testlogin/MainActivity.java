@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     private void initFacebookLoginButton() {
 
         // using default fb button for login
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.button_login);
         loginButton.setReadPermissions();
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "user_birthday", "user_likes"));
@@ -141,22 +141,21 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         switch (item.getItemId())
         {
-            case R.id.nav_camera:
+            case R.id.nav_profile:
                 Toast.makeText(getApplicationContext(), "CAMERA ICON", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_gallery:
-                Toast.makeText(getApplicationContext(), "Gallery Icon", Toast.LENGTH_SHORT).show();
+            case R.id.nav_history:
+                Toast.makeText(getApplicationContext(), "History Icon", Toast.LENGTH_SHORT).show();
                 break;
-
+            case R.id.nav_payment:
+                break;
             case R.id.nav_sign_out:
 
                 LoginManager.getInstance().logOut();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_slideshow:
-                break;
-            case R.id.nav_share:
+            case R.id.nav_help:
                 break;
             case R.id.nav_settings:
                 break;

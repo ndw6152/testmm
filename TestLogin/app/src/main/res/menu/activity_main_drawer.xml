@@ -3,39 +3,51 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/com_facebook_profile_picture_blank_portrait"
+            android:title="Profile" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_history"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="History" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_payment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Payment" />
     </group>
-
 
     <group >
         <item
+            android:id="@+id/nav_sign_up_mech"
+            android:icon="@drawable/com_facebook_button_like_icon_selected"
+            android:title="Sign up as Mechanic" />
+
+        <item
             android:id="@+id/nav_sign_out"
             android:icon="@drawable/com_facebook_profile_picture_blank_square"
-            android:title="Sign Out FB" />
-
+            android:title="Sign Out" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Settings" />
-        </menu>
-    </item>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none" >
+
+        <item
+            android:id="@+id/nav_legal_info"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Legal Information" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/com_facebook_auth_dialog_header_background"
+            android:title="Help" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Settings" />
+    </group>
+
+
 
 </menu>
