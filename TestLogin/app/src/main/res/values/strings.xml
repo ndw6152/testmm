@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">TestLogin</string>
-    <string name="facebook_app_id">INSERT_APP_ID</string>
-    <string name="app_login_name">Login Screen</string>
+    <string name="title_main">TestLogin</string>
+    <string name="title_login_name">Login Screen</string>
+    <string name="title_profile_edit">Edit Profile</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

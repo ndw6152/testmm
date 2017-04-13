@@ -139,10 +139,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Intent intent;
         switch (item.getItemId())
         {
             case R.id.nav_profile:
-                Toast.makeText(getApplicationContext(), "CAMERA ICON", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, ProfileEditActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_history:
                 Toast.makeText(getApplicationContext(), "History Icon", Toast.LENGTH_SHORT).show();
@@ -150,9 +152,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_payment:
                 break;
             case R.id.nav_sign_out:
-
                 LoginManager.getInstance().logOut();
-                Intent intent = new Intent(this, LoginActivity.class);
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.nav_help:
