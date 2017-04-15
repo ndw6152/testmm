@@ -7,20 +7,17 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 /**
- * Created by ndw6152 on 4/12/2017.
+ * Created by ndw6152 on 4/15/2017.
  *
  */
 
-public class ProfileEditActivity extends AppCompatActivity {
-    private String TAG = "ProfileScreen";
+public class MechEditActivity extends AppCompatActivity {
+    private String TAG = "MechincScreen";
 
 
     public void showToast(String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,7 +38,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 showToast("Saving");
                 return true;
             case R.id.menu_discard_changes:
-                showToast("Discard profile Changes");
+                showToast("Discard Mech Changes");
                 return true;
 
             default:
@@ -51,15 +48,16 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        showToast("Close and Discard changes");
+        showToast("Close and Discard MECH changes");
         return false;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_edit);
+        setContentView(R.layout.activity_mech_profile_edit);
 
+        // adding the done button at the top left
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

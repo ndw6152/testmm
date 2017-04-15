@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -151,10 +151,16 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_payment:
                 break;
+            case R.id.nav_sign_up_mech:
+                intent = new Intent(this, MechEditActivity.class);
+                startActivity(intent);
+                break;
             case R.id.nav_sign_out:
                 LoginManager.getInstance().logOut();
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.nav_legal_info:
                 break;
             case R.id.nav_help:
                 break;
