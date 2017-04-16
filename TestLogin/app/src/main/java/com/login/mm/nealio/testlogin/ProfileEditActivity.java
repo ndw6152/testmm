@@ -8,10 +8,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -71,9 +74,11 @@ public class ProfileEditActivity extends AppCompatActivity {
         {
             case R.id.menu_save_profile:
                 showToast("Saving");
+                textChanged = false; // set to false to prevent the dialog box from showing
 
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("key1", "Saved");
+                TextView nameView = (TextView) findViewById(R.id.editText_profile_name);
+                resultIntent.putExtra("key1", "" + nameView.getText());
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             case R.id.menu_discard_changes:
@@ -89,8 +94,10 @@ public class ProfileEditActivity extends AppCompatActivity {
         return false;
     }
 
+
+    // TODO: need to figure out a way to only pop up dialog box when a change occur and not after i set the information
     public void addOnTextChangedListenerToAllEditText(@android.support.annotation.IdRes int layoutId) {
-        LinearLayout mechEditTextViews = (LinearLayout) findViewById(layoutId);
+        LinearLayout profileEditTextViews = (LinearLayout) findViewById(layoutId);
 
         // listener to update a flag that a text box was edited
         TextWatcher tw = new TextWatcher() {
@@ -101,19 +108,21 @@ public class ProfileEditActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                textChanged = true;
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                textChanged = true;
             }
         };
 
+
+
         // loop to add the listener to all edittext box
-        for( int i = 0; i < mechEditTextViews.getChildCount(); i++ ) {
-            if( mechEditTextViews.getChildAt(i) instanceof EditText) {
-                ((EditText) mechEditTextViews.getChildAt(i)).addTextChangedListener(tw);
+        for( int i = 0; i < profileEditTextViews.getChildCount(); i++ ) {
+            if( profileEditTextViews.getChildAt(i) instanceof EditText) {
+                ((EditText) profileEditTextViews.getChildAt(i)).addTextChangedListener(tw);
             }
         }
     }
@@ -128,6 +137,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // getting initial information from the main activitiy and setting the first edit text view content
         Intent in = getIntent();
         Bundle b = in.getExtras();
         EditText nameView = (EditText) findViewById(R.id.editText_profile_name);

@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity
                     Bundle b = data.getExtras();
                     TextView nameView = (TextView) findViewById(R.id.main_first_text);
                     nameView.setText(b.getString("key1"));
+                    mCustomer.setName(b.getString("key1"));
                 }
                 break;
         }
