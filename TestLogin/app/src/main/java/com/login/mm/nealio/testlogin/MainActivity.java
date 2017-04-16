@@ -29,66 +29,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private String TAG = "MainScreen";
-    private CallbackManager mFBcallbackManager;
 
-    private void initFacebookLoginButton() {
-
-        // using default fb button for login
-        LoginButton loginButton = (LoginButton) findViewById(R.id.button_login);
-        loginButton.setReadPermissions();
-        loginButton.setReadPermissions(Arrays.asList(
-                "public_profile", "user_birthday", "user_likes"));
-
-        // Callback registration
-        loginButton.registerCallback(mFBcallbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Log.d(TAG, "FB success" +  loginResult.getAccessToken());
-                        Profile profile = Profile.getCurrentProfile();
-
-                        // Facebook Email address
-                        GraphRequest request = GraphRequest.newMeRequest(
-                                loginResult.getAccessToken(),
-                                new GraphRequest.GraphJSONObjectCallback() {
-                                    @Override
-                                    public void onCompleted(JSONObject object, GraphResponse response) {
-                                        Log.d(TAG, "LoginActivity Response " + response.toString());
-
-                                        try {
-                                            String name = object.getString("name");
-                                            Log.d(TAG, "Name = " + name);
-                                            String gender = object.getString("gender");
-                                            Log.d(TAG, "Gender = " + gender);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                });
-                        Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, name, gender, work");
-                        request.setParameters(parameters);
-                        request.executeAsync();
-
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Log.e(TAG, "on Cancel");
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        Log.e(TAG, "FB error" + exception.toString());
-                    }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "running the on activity");
-        mFBcallbackManager.onActivityResult(requestCode, resultCode, data); // sending information to fb sdk
-    }
 
     @Override
     public void onBackPressed() {
@@ -178,9 +119,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mFBcallbackManager = CallbackManager.Factory.create();
-        initFacebookLoginButton();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
