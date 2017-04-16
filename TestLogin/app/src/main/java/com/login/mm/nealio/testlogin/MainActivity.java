@@ -1,34 +1,29 @@
 package com.login.mm.nealio.testlogin;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
+
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.Arrays;
+import com.login.mm.nealio.testlogin.User.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int FROM_PROFILE_EDIT_SCREEN = 911;
     private String TAG = "MainScreen";
+    private User mCustomer;
 
 
     @Override
@@ -78,14 +73,18 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         Intent intent;
         switch (item.getItemId())
         {
             case R.id.nav_profile:
                 intent = new Intent(this, ProfileEditActivity.class);
-                startActivity(intent);
+
+                Bundle b = new Bundle();
+                b.putString("key1", mCustomer.getName());
+                intent.putExtras(b);
+                startActivityForResult(intent, FROM_PROFILE_EDIT_SCREEN);  // starting the intent with special id that will be called back
                 break;
             case R.id.nav_history:
                 Toast.makeText(getApplicationContext(), "History Icon", Toast.LENGTH_SHORT).show();
@@ -102,10 +101,13 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             case R.id.nav_legal_info:
+                Toast.makeText(getApplicationContext(), "Legal", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_help:
+                Toast.makeText(getApplicationContext(), "Help", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_settings:
+                Toast.makeText(getApplicationContext(), "Settings", Toast.LENGTH_SHORT).show();
                 break;
         }
 
@@ -132,5 +134,23 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        mCustomer = new User("TEST_customer1");
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (FROM_PROFILE_EDIT_SCREEN):
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle b = data.getExtras();
+                    TextView nameView = (TextView) findViewById(R.id.main_first_text);
+                    nameView.setText(b.getString("key1"));
+                }
+                break;
+        }
     }
 }

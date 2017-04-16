@@ -1,6 +1,8 @@
 package com.login.mm.nealio.testlogin;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -69,7 +71,11 @@ public class ProfileEditActivity extends AppCompatActivity {
         {
             case R.id.menu_save_profile:
                 showToast("Saving");
-                return true;
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("key1", "Saved");
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
             case R.id.menu_discard_changes:
                 actionOnCloseButtonPressed();
             default:
@@ -122,5 +128,9 @@ public class ProfileEditActivity extends AppCompatActivity {
         this.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Intent in = getIntent();
+        Bundle b = in.getExtras();
+        EditText nameView = (EditText) findViewById(R.id.editText_profile_name);
+        nameView.setText(b.getString("key1"));
     }
 }
