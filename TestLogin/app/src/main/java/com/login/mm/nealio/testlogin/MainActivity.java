@@ -119,6 +119,21 @@ public class MainActivity extends AppCompatActivity
 
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (FROM_PROFILE_EDIT_SCREEN):
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle b = data.getExtras();
+                    TextView nameView = (TextView) findViewById(R.id.main_first_text);
+                    nameView.setText(b.getString("key1"));
+                    mCustomer.setName(b.getString("key1"));
+                }
+                break;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -135,24 +150,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         mCustomer = new User("TEST_customer1");
-
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
-            case (FROM_PROFILE_EDIT_SCREEN):
-                if (resultCode == Activity.RESULT_OK) {
-                    Bundle b = data.getExtras();
-                    TextView nameView = (TextView) findViewById(R.id.main_first_text);
-                    nameView.setText(b.getString("key1"));
-                    mCustomer.setName(b.getString("key1"));
-                }
-                break;
-        }
     }
 }

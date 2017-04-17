@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -49,9 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(mFBcallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "FB success" +  loginResult.getAccessToken());
-                Profile profile = Profile.getCurrentProfile();
-
                 // Facebook Email address
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
@@ -74,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                 parameters.putString("fields", "id, name, gender, work");
                 request.setParameters(parameters);
                 request.executeAsync();
-
 
                 onSuccessLaunchMainScreen();
 
@@ -106,5 +104,12 @@ public class LoginActivity extends AppCompatActivity {
         mFBcallbackManager = CallbackManager.Factory.create();
         initFacebookLoginButton();
 
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        if (token != null) {
+            Toast.makeText(getApplicationContext(), "Token still valid", Toast.LENGTH_SHORT).show();
+            onSuccessLaunchMainScreen();
+        }
+
     }
 }
+
