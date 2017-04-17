@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity
                 LoginManager.getInstance().logOut();
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_legal_info:
                 Toast.makeText(getApplicationContext(), "Legal", Toast.LENGTH_SHORT).show();
