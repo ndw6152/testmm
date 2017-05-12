@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.login.mm.nealio.testlogin.Authorization.RestClientActivity;
 import com.login.mm.nealio.testlogin.User.User;
 
 public class MainActivity extends AppCompatActivity
@@ -87,7 +88,9 @@ public class MainActivity extends AppCompatActivity
                 startActivityForResult(intent, FROM_PROFILE_EDIT_SCREEN);  // starting the intent with special id that will be called back
                 break;
             case R.id.nav_history:
-                Toast.makeText(getApplicationContext(), "History Icon", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, RestClientActivity.class);
+                startActivityForResult(intent, FROM_PROFILE_EDIT_SCREEN);
+
                 break;
             case R.id.nav_payment:
                 break;
