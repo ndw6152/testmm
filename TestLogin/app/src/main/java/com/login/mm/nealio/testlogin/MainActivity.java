@@ -12,12 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
-import com.login.mm.nealio.testlogin.Authorization.RestClientActivity;
-import com.login.mm.nealio.testlogin.User.User;
+import com.login.mm.nealio.testlogin.authorization.RestClientActivity;
+import com.login.mm.nealio.testlogin.user.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -128,13 +128,21 @@ public class MainActivity extends AppCompatActivity
             case (FROM_PROFILE_EDIT_SCREEN):
                 if (resultCode == Activity.RESULT_OK) {
                     Bundle b = data.getExtras();
-                    TextView nameView = (TextView) findViewById(R.id.main_first_text);
-                    nameView.setText(b.getString("key1"));
-                    mCustomer.setName(b.getString("key1"));
                 }
                 break;
         }
     }
+
+
+    public void createNewJobOnClick(View view) {
+        Intent intent;
+        intent = new Intent(this, JobFormActivity.class);
+        startActivity(intent);
+
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,4 +163,6 @@ public class MainActivity extends AppCompatActivity
 
         mCustomer = new User("TEST_customer1");
     }
+
+
 }

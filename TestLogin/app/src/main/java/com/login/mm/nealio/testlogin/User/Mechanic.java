@@ -1,4 +1,4 @@
-package com.login.mm.nealio.testlogin.User;
+package com.login.mm.nealio.testlogin.user;
 
 /**
  * Created by ndw6152 on 4/15/2017.

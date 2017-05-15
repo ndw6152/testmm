@@ -1,4 +1,4 @@
-package com.login.mm.nealio.testlogin.Authorization;
+package com.login.mm.nealio.testlogin.authorization;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +10,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 

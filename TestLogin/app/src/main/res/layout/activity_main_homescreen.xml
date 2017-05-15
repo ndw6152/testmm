@@ -33,21 +33,6 @@
             android:layout_margin="16dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/main_first_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="Hello"
-                android:textSize="32sp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="World"
-                android:textSize="32sp" />
             <!-- just draw a red line -->
             <View
                 android:layout_width="wrap_content"
@@ -56,6 +41,7 @@
                 android:background="#000000" />
 
             <TableLayout
+                android:id="@+id/tl_main_jobs_table"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -110,10 +96,12 @@
             </TableLayout>
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button_main_create_new_job"
+                android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:onClick="createNewJobOnClick"
                 android:text="Create new job" />
 
         </LinearLayout>

@@ -34,7 +34,11 @@
             android:label="@string/title_profile_edit" />
 
         <activity
-            android:name=".Authorization.RestClientActivity"
+            android:name=".JobFormActivity"
+            android:label="New Job" />
+
+        <activity
+            android:name=".authorization.RestClientActivity"
             android:label="@string/test_rest_client_name" />
 
         <meta-data
