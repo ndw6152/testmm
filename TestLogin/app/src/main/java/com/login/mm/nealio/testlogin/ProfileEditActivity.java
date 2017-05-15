@@ -81,8 +81,6 @@ public class ProfileEditActivity extends AppCompatActivity {
                 resultIntent.putExtra("key1", "" + nameView.getText());
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
-            case R.id.menu_discard_changes:
-                actionOnCloseButtonPressed();
             default:
                 return super.onOptionsItemSelected(item);
         }

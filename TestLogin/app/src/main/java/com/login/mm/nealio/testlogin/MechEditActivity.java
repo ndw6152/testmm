@@ -73,9 +73,6 @@ public class MechEditActivity extends AppCompatActivity {
             case R.id.menu_save_profile:
                 showToast("Saving");
                 return true;
-            case R.id.menu_discard_changes:
-                showToast("MENU discard");
-                actionOnCloseButtonPressed();
             default:
                 return super.onOptionsItemSelected(item);
         }
