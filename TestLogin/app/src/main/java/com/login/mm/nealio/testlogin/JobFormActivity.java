@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,23 @@ public class JobFormActivity extends AppCompatActivity {
     private String TAG = "New Job Form";
     private final int CHOOSING_IMAGE_FROM_GALLERY = 1000;
 
+
+
+    private ImageView createImageViewsWhenChosen(Uri imageUri) {
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200, 200);
+        ImageView imgView = new ImageView(this);
+        imgView.setLayoutParams(layoutParams);
+        imgView.setImageURI(null);
+        imgView.setImageURI(imageUri);
+        imgView.setClickable(true);
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), v.getWindowId()+"", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return imgView;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -38,33 +56,22 @@ public class JobFormActivity extends AppCompatActivity {
 
                     LinearLayout linearLayoutImages = (LinearLayout)findViewById(R.id.ll_images_from_gallery);
 
-
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200, 200);
-                    //layoutParams.setMargins(4, 0, 4, 0);
-
                     if(data.getData()!= null){
-
-                        Uri mImageUri = data.getData();
-                        ImageView imgView = new ImageView(this);
-                        imgView.setLayoutParams(layoutParams);
-
-                        imgView.setImageURI(null);
-                        imgView.setImageURI(mImageUri);
+                        Uri imageUri = data.getData();
+                        ImageView imgView = createImageViewsWhenChosen(imageUri);
                         linearLayoutImages.addView(imgView);
 
-                    }else {
+                    }
+                    else {
                         if (data.getClipData() != null) {
                             ClipData mClipData = data.getClipData();
                             ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+
                             for (int i = 0; i < mClipData.getItemCount(); i++) {
                                 ClipData.Item item = mClipData.getItemAt(i);
-                                Uri uri = item.getUri();
+                                Uri imageUri = item.getUri();
 
-                                ImageView imgView = new ImageView(this);
-                                imgView.setLayoutParams(layoutParams);
-
-                                imgView.setImageURI(null);
-                                imgView.setImageURI(uri);
+                                ImageView imgView = createImageViewsWhenChosen(imageUri);
                                 linearLayoutImages.addView(imgView);
 
                             }
