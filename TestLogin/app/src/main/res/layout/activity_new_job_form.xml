@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
         <TextView
@@ -21,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:maxLines="1"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:maxLines="1" />
 
 
         <TextView
@@ -34,7 +36,7 @@
         <EditText
             android:id="@+id/editText2"
             android:layout_width="match_parent"
-            android:layout_height="88dp"
+            android:layout_height="150dp"
             android:layout_marginBottom="4dp"
             android:hint="Enter description of problem"
             android:inputType="textMultiLine" />
@@ -44,24 +46,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Additional options:" />
+
         <Switch
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Need on-site visit" />
+            android:text="Need on-site diagnostic" />
 
         <Switch
             android:id="@+id/switch2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Need car pickup" />
+            android:text="Is car in working condition" />
 
         <Switch
             android:id="@+id/switch3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Repair at mechanic shop" />
+            android:text="Can repair be done on-site" />
+        
+        <Switch
+            android:id="@+id/switch4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Need car pick-up and drop-off" />
 
+
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_images_from_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -70,20 +94,31 @@
 
 
             <Button
+                android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/button4"
-                android:layout_toStartOf="@+id/button4" />
+                android:layout_toStartOf="@+id/button4"
+                android:text="Cancel" />
+
             <Button
+                android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/button4" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="Submit" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:onClick="ChoosePicturesFromGalleryOnClick"
+                android:text="Add pictures" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>
