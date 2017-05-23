@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_payment:
+
                 break;
             case R.id.nav_sign_up_mech:
                 intent = new Intent(this, MechEditActivity.class);
@@ -124,12 +125,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
-            case (FROM_PROFILE_EDIT_SCREEN):
-                if (resultCode == Activity.RESULT_OK) {
+        if(resultCode == RESULT_OK) {
+            switch(requestCode) {
+                case (FROM_PROFILE_EDIT_SCREEN):
                     Bundle b = data.getExtras();
-                }
-                break;
+                    break;
+            }
         }
     }
 

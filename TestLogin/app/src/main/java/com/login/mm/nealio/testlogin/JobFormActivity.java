@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.login.mm.nealio.testlogin.user.Job;
+
 import java.util.ArrayList;
 
 /**
@@ -24,6 +26,8 @@ import java.util.ArrayList;
 public class JobFormActivity extends AppCompatActivity {
     private String TAG = "New Job Form";
     private final int CHOOSING_IMAGE_FROM_GALLERY = 1000;
+
+    private Job mJob;
 
 
 
@@ -91,14 +95,28 @@ public class JobFormActivity extends AppCompatActivity {
         LinearLayout imageLayout = (LinearLayout)findViewById(R.id.ll_images_from_gallery);
         if((imageLayout).getChildCount() > 0)
             imageLayout.removeAllViews();
+
     }
+
+    public void submitJobOnClick(View view) {
+
+
+    }
+
+    public void cancelJobOnClick(View view) {
+        finish();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_job_form);
 
+        mJob = new Job();
+
     }
+
 
 
 }
