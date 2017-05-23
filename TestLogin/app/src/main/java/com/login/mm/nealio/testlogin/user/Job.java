@@ -61,7 +61,7 @@ public class Job {
         this.carInWorkingCondition = carInWorkingCondition;
     }
 
-    public boolean isRepairCanBeDoneOnSite() {
+    public boolean repairCanBeDoneOnSite() {
         return repairCanBeDoneOnSite;
     }
 

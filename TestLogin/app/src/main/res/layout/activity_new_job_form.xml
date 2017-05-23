@@ -48,7 +48,7 @@
             android:text="Additional options:" />
 
         <Switch
-            android:id="@+id/switch_on_site_repair"
+            android:id="@+id/switch_on_site_diagnostic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Need on-site diagnostic" />

@@ -1,18 +1,17 @@
 package com.login.mm.nealio.testlogin;
 
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.login.mm.nealio.testlogin.user.Job;
@@ -104,7 +103,41 @@ public class JobFormActivity extends AppCompatActivity {
     }
 
     public void cancelJobOnClick(View view) {
+
+        
         finish();
+    }
+
+
+
+    private void initializeSwitches() {
+        Switch switchOnSiteDiagnostic = (Switch) findViewById(R.id.switch_on_site_diagnostic);
+        switchOnSiteDiagnostic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mJob.setOnSiteDiagnostic(isChecked);
+            }
+        });
+
+        Switch switchCarInWorkingCondition = (Switch) findViewById(R.id.switch_car_in_working_condition);
+        switchCarInWorkingCondition.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mJob.setCarInWorkingCondition(isChecked);
+            }
+        });
+
+        Switch switchRepairCanBeDoneOnSite = (Switch) findViewById(R.id.switch_repair_done_on_site);
+        switchRepairCanBeDoneOnSite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mJob.setRepairCanBeDoneOnSite(isChecked);
+            }
+        });
+
+        Switch switchCarPickUpDropOff = (Switch) findViewById(R.id.switch_car_pick_up_drop_off);
+        switchCarPickUpDropOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mJob.setCarPickUpDropOff(isChecked);
+            }
+        });
     }
 
 
@@ -114,6 +147,8 @@ public class JobFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_job_form);
 
         mJob = new Job();
+
+        initializeSwitches();
 
     }
 
