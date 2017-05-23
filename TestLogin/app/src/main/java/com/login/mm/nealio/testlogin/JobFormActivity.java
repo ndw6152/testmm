@@ -28,6 +28,8 @@ public class JobFormActivity extends AppCompatActivity {
     private String TAG = "New Job Form";
     private final int CHOOSING_IMAGE_FROM_GALLERY = 1000;
 
+    private boolean changesMade = false;
+
     private Job mJob;
 
 
@@ -88,6 +90,7 @@ public class JobFormActivity extends AppCompatActivity {
     }
 
     public void ChoosePicturesFromGalleryOnClick(View view) {
+        changesMade = true;
         Intent imageIntent = new Intent();
         imageIntent.setType("image/*");
         imageIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -106,21 +109,27 @@ public class JobFormActivity extends AppCompatActivity {
 
 
     private void launchUnsavedChangesDialogBox() {
-        new AlertDialog.Builder(this)
-                .setTitle("Unsaved Changes")
-                .setMessage("Are you sure you want to discard these changes?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        if(changesMade) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Unsaved Changes")
+                    .setMessage("Are you sure you want to discard these changes?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+        else{
+            finish();
+        }
+
     }
 
     public void cancelJobOnClick(View view) {
@@ -134,6 +143,7 @@ public class JobFormActivity extends AppCompatActivity {
         switchOnSiteDiagnostic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setOnSiteDiagnostic(isChecked);
+                changesMade = true;
             }
         });
 
@@ -141,6 +151,7 @@ public class JobFormActivity extends AppCompatActivity {
         switchCarInWorkingCondition.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setCarInWorkingCondition(isChecked);
+                changesMade = true;
             }
         });
 
@@ -148,6 +159,7 @@ public class JobFormActivity extends AppCompatActivity {
         switchRepairCanBeDoneOnSite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setRepairCanBeDoneOnSite(isChecked);
+                changesMade = true;
             }
         });
 
@@ -155,6 +167,7 @@ public class JobFormActivity extends AppCompatActivity {
         switchCarPickUpDropOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setCarPickUpDropOff(isChecked);
+                changesMade = true;
             }
         });
     }
