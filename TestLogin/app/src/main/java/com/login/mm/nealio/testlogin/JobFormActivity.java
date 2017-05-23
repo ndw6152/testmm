@@ -1,10 +1,12 @@
 package com.login.mm.nealio.testlogin;
 
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -102,10 +104,27 @@ public class JobFormActivity extends AppCompatActivity {
 
     }
 
-    public void cancelJobOnClick(View view) {
 
-        
-        finish();
+    private void launchUnsavedChangesDialogBox() {
+        new AlertDialog.Builder(this)
+                .setTitle("Unsaved Changes")
+                .setMessage("Are you sure you want to discard these changes?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void cancelJobOnClick(View view) {
+        launchUnsavedChangesDialogBox();
     }
 
 
@@ -140,7 +159,11 @@ public class JobFormActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        launchUnsavedChangesDialogBox();
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
