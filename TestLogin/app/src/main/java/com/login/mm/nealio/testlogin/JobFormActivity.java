@@ -176,7 +176,7 @@ public class JobFormActivity extends AppCompatActivity {
         Switch switchCarPickUpDropOff = (Switch) findViewById(R.id.switch_car_pick_up_drop_off);
         switchCarPickUpDropOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mJob.setCarPickUpDropOff(isChecked);
+                mJob.setCarPickUpAndDropOff(isChecked);
                 changesMade = true;
             }
         });

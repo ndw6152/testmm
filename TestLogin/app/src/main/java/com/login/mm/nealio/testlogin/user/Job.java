@@ -13,19 +13,19 @@ public class Job {
     private boolean onSiteDiagnostic = false;
     private boolean carInWorkingCondition = false;
     private boolean repairCanBeDoneOnSite = false;
-    private boolean carPickUpDropOff = false;
+    private boolean carPickUpAndDropOff = false;
 
     public Job() {
 
     }
 
-    public Job (String summary, String description, boolean onSiteDiagnostic, boolean carInWorkingCondition, boolean repairCanBeDoneOnSite, boolean carPickUpDropOff) {
+    public Job (String summary, String description, boolean onSiteDiagnostic, boolean carInWorkingCondition, boolean repairCanBeDoneOnSite, boolean carPickUpAndDropOff) {
         this.summary = summary;
         this.description = description;
         this.onSiteDiagnostic = onSiteDiagnostic;
         this.carInWorkingCondition = carInWorkingCondition;
         this.repairCanBeDoneOnSite = repairCanBeDoneOnSite;
-        this.carPickUpDropOff = carPickUpDropOff;
+        this.carPickUpAndDropOff = carPickUpAndDropOff;
     }
 
 
@@ -61,7 +61,7 @@ public class Job {
         this.carInWorkingCondition = carInWorkingCondition;
     }
 
-    public boolean repairCanBeDoneOnSite() {
+    public boolean isRepairDoneOnSite() {
         return repairCanBeDoneOnSite;
     }
 
@@ -69,11 +69,11 @@ public class Job {
         this.repairCanBeDoneOnSite = repairCanBeDoneOnSite;
     }
 
-    public boolean isCarPickUpDropOff() {
-        return carPickUpDropOff;
+    public boolean isCarPickUpAndDropOff() {
+        return carPickUpAndDropOff;
     }
 
-    public void setCarPickUpDropOff(boolean carPickUpDropOff) {
-        this.carPickUpDropOff = carPickUpDropOff;
+    public void setCarPickUpAndDropOff(boolean carPickUpAndDropOff) {
+        this.carPickUpAndDropOff = carPickUpAndDropOff;
     }
 }

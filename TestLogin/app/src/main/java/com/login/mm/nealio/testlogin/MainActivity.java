@@ -1,6 +1,6 @@
 package com.login.mm.nealio.testlogin;
 
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,8 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -127,6 +129,30 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
+
+
+
+    public void displayJobsOnMainHomeScreen(final Job job) {
+        TableLayout tableLayout = (TableLayout)findViewById(R.id.tl_main_jobs_table);
+        TableRow tableRow = new TableRow(this);
+        tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+/* Create a Button to be the row-content. */
+        TextView textView = new TextView(this);
+        textView.setText(job.getSummary());
+        textView.setTextSize(32);
+        tableRow.addView(textView);
+
+        Button statusButton = new Button(this);
+        statusButton.setText("status");
+
+
+        tableRow.addView(statusButton, 1);
+        tableLayout.addView(tableRow);
+
+    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -143,6 +169,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     Job newJob = new Gson().fromJson(jsonMyObject, Job.class);
                     newJob.getSummary();
+                    displayJobsOnMainHomeScreen(newJob);
                     break;
             }
         }
