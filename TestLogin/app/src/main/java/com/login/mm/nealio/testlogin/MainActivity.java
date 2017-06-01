@@ -13,19 +13,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.google.gson.Gson;
 import com.login.mm.nealio.testlogin.authorization.RestClientActivity;
+import com.login.mm.nealio.testlogin.user.Job;
 import com.login.mm.nealio.testlogin.user.User;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int FROM_PROFILE_EDIT_SCREEN = 911;
     private String TAG = "MainScreen";
     private User mCustomer;
 
+    private static final int FROM_PROFILE_EDIT_SCREEN = 123;
+    private static final int FROM_NEW_JOB_SCREEN = 124;
 
     @Override
     public void onBackPressed() {
@@ -130,6 +135,15 @@ public class MainActivity extends AppCompatActivity
                 case (FROM_PROFILE_EDIT_SCREEN):
                     Bundle b = data.getExtras();
                     break;
+                case (FROM_NEW_JOB_SCREEN):
+                    String jsonMyObject = "";
+                    Bundle extras = data.getExtras();
+                    if (extras != null) {
+                        jsonMyObject = extras.getString("newJob");
+                    }
+                    Job newJob = new Gson().fromJson(jsonMyObject, Job.class);
+                    newJob.getSummary();
+                    break;
             }
         }
     }
@@ -138,12 +152,9 @@ public class MainActivity extends AppCompatActivity
     public void createNewJobOnClick(View view) {
         Intent intent;
         intent = new Intent(this, JobFormActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, FROM_NEW_JOB_SCREEN);
 
     }
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

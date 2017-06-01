@@ -1,5 +1,6 @@
 package com.login.mm.nealio.testlogin;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,8 +15,10 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.login.mm.nealio.testlogin.user.Job;
 
 import java.util.ArrayList;
@@ -103,8 +106,15 @@ public class JobFormActivity extends AppCompatActivity {
     }
 
     public void submitJobOnClick(View view) {
+        Intent resultIntent = new Intent();
+        TextView summaryView = (TextView) findViewById(R.id.editText_job_summary);
+        mJob.setSummary("" + summaryView.getText());
 
-
+        TextView descriptionView = (TextView) findViewById(R.id.editText_job_description);
+        mJob.setDescription("" + descriptionView.getText());
+        resultIntent.putExtra("newJob", "" + new Gson().toJson(mJob));
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 
 
