@@ -129,7 +129,29 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void showJobInformation(Job job) {
+        // custom dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_main_job_dialog);
+        dialog.setTitle("Job Information");
 
+        // set the custom dialog components - text, image and button
+        TextView text = (TextView) dialog.findViewById(R.id.textView_dialog_job_summary);
+        text.setText(job.getSummary());
+        TextView text1 = (TextView) dialog.findViewById(R.id.textView_dialog_job_description);
+        text1.setText("Description: \n" + job.getDescription());
+        TextView text2 = (TextView) dialog.findViewById(R.id.textView_dialog_onSiteDiagnostic);
+        text2.setText("On Site Diagnostic = " + job.isOnSiteDiagnostic());
+        TextView text3 = (TextView) dialog.findViewById(R.id.textView_dialog_carInWorkingCondition);
+        text3.setText("Car in working condition = " + job.isCarInWorkingCondition());
+        TextView text4 = (TextView) dialog.findViewById(R.id.textView_dialog_repairCanBeDoneOnSite);
+        text4.setText("Repair can be done on=site = " + job.isRepairDoneOnSite());
+        TextView text5 = (TextView) dialog.findViewById(R.id.textView_dialog_carPickUpDropOff);
+        text5.setText("Car pick up and drop off = " + job.isCarPickUpAndDropOff());
+
+
+        dialog.show();
+    }
 
 
 
@@ -146,6 +168,14 @@ public class MainActivity extends AppCompatActivity
         Button statusButton = new Button(this);
         statusButton.setText("status");
 
+        statusButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                showJobInformation(job);
+            }
+        });
 
         tableRow.addView(statusButton, 1);
         tableLayout.addView(tableRow);
