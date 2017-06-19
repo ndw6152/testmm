@@ -180,6 +180,15 @@ public class JobFormActivity extends AppCompatActivity {
                 changesMade = true;
             }
         });
+
+
+        Switch switchParkingAvailable = (Switch) findViewById(R.id.switch_parking_available);
+        switchParkingAvailable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mJob.setParkingAvailable(isChecked);
+                changesMade = true;
+            }
+        });
     }
 
     @Override

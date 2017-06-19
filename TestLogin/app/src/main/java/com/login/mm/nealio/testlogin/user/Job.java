@@ -14,6 +14,7 @@ public class Job {
     private boolean carInWorkingCondition = false;
     private boolean repairCanBeDoneOnSite = false;
     private boolean carPickUpAndDropOff = false;
+    private boolean parkingAvailable = false;
 
     public Job() {
 
@@ -26,6 +27,7 @@ public class Job {
         this.carInWorkingCondition = carInWorkingCondition;
         this.repairCanBeDoneOnSite = repairCanBeDoneOnSite;
         this.carPickUpAndDropOff = carPickUpAndDropOff;
+
     }
 
 
@@ -75,5 +77,12 @@ public class Job {
 
     public void setCarPickUpAndDropOff(boolean carPickUpAndDropOff) {
         this.carPickUpAndDropOff = carPickUpAndDropOff;
+    }
+
+    public boolean isParkingAvailable() {
+        return parkingAvailable;
+    }
+    public void setParkingAvailable(boolean parkingAvailable) {
+        this.parkingAvailable = parkingAvailable;
     }
 }

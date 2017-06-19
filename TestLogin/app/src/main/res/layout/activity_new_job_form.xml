@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="16dp">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="vertical"
         android:weightSum="1">
@@ -41,10 +40,32 @@
             android:hint="Enter description of problem"
             android:inputType="textMultiLine" />
 
+        <EditText
+            android:id="@+id/editText_car_make"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter car make" />
+
+        <EditText
+            android:id="@+id/editText_car_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter car model" />
+
+        <EditText
+            android:id="@+id/editText_car_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter car year" />
+
         <TextView
             android:id="@+id/textView56"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="8dp"
             android:text="Additional options:" />
 
         <Switch
@@ -71,7 +92,11 @@
             android:layout_height="wrap_content"
             android:text="Need car pick-up and drop-off" />
 
-
+        <Switch
+            android:id="@+id/switch_parking_available"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Parking available for mechanic" />
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
@@ -97,10 +122,10 @@
                 android:id="@+id/button_cancel_job"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="cancelJobOnClick"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/button_submit_job"
                 android:layout_toStartOf="@+id/button_submit_job"
+                android:onClick="cancelJobOnClick"
                 android:text="Cancel" />
 
             <Button
@@ -108,9 +133,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:onClick="submitJobOnClick"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
+                android:onClick="submitJobOnClick"
                 android:text="Submit" />
 
             <Button
@@ -122,7 +147,14 @@
                 android:onClick="ChoosePicturesFromGalleryOnClick"
                 android:text="Add pictures" />
         </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="32dp"/>
     </LinearLayout>
+
+
 </ScrollView>
 
 

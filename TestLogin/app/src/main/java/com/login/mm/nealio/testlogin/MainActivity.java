@@ -145,10 +145,12 @@ public class MainActivity extends AppCompatActivity
         TextView text3 = (TextView) dialog.findViewById(R.id.textView_dialog_carInWorkingCondition);
         text3.setText("Car in working condition = " + job.isCarInWorkingCondition());
         TextView text4 = (TextView) dialog.findViewById(R.id.textView_dialog_repairCanBeDoneOnSite);
-        text4.setText("Repair can be done on=site = " + job.isRepairDoneOnSite());
+        text4.setText("Repair can be done on-site = " + job.isRepairDoneOnSite());
         TextView text5 = (TextView) dialog.findViewById(R.id.textView_dialog_carPickUpDropOff);
         text5.setText("Car pick up and drop off = " + job.isCarPickUpAndDropOff());
 
+        TextView text6 = (TextView) dialog.findViewById(R.id.textView_dialog_parkingAvailable);
+        text6.setText("Parking available on-site = " + job.isParkingAvailable());
 
         dialog.show();
     }
