@@ -174,15 +174,23 @@ public class JobFormActivity extends AppCompatActivity {
         });
 
         Switch switchCarPickUpDropOff = (Switch) findViewById(R.id.switch_car_pick_up_drop_off);
+        final Switch switchParkingAvailable = (Switch) findViewById(R.id.switch_parking_available);
         switchCarPickUpDropOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setCarPickUpAndDropOff(isChecked);
                 changesMade = true;
+                if(isChecked) {
+                    switchParkingAvailable.setVisibility(View.VISIBLE);
+
+                }
+                else {
+                    switchParkingAvailable.setVisibility(View.INVISIBLE);
+                    switchParkingAvailable.setChecked(false);
+                    mJob.setParkingAvailable(false);
+                }
             }
         });
 
-
-        Switch switchParkingAvailable = (Switch) findViewById(R.id.switch_parking_available);
         switchParkingAvailable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 mJob.setParkingAvailable(isChecked);
