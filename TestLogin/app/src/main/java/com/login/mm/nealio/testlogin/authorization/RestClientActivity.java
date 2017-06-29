@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.gson.JsonObject;
 import com.login.mm.nealio.testlogin.R;
 
 import java.io.IOException;
@@ -68,15 +69,32 @@ public class RestClientActivity extends AppCompatActivity {
         RestClient.post(url, postBody, getCallback);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public void runTestPostCall() {
         testGetCall("https://api.github.com/users/codepath");
         testGetCall("http://publicobject.com/helloworld.txt");
 
         Log.i(TAG, "--------");
         testPostCall("https://api.github.com/markdown/raw", "" + "Releases\n" + "--------\n" + "\n" + " * _1.0_ May 6, 2013\n" + " * _1.1_ June 15, 2013\n" + " * _1.2_ August 11, 2013\n");
+    }
+
+
+    public void runPOST() {
+        JsonObject json = new JsonObject();
+        json.addProperty("username", "EAALiW35MchoBAM6nFmnICAafVbJtRRKTIrd5cXaBJZBFe6KloSoHm4qybnSgMKKUMb5oxtMK9z9lfHil6rNmbjrBzttWAseqw02gwaZBnbSVndLBV4ZBjq5pZCH2mZBGs6XA7zPVscZBa9ZBXSLmRZAWKkXBDL6aXJr1EC0lYPV9tZCTeiPutbGhkaYDfnN68924ZD");
+        json.addProperty("password", "none");
+
+        String url = "http://50.43.59.234:5000/mobilemechanic/api/v1.0/auth";
+        RestClient.post(url, json.toString(), getCallback);
+        Log.i(TAG, "Finish posting");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        Log.i(TAG, "running main");
+        runPOST();
+
 
 
 

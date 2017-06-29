@@ -13,13 +13,21 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.gson.JsonObject;
+import com.login.mm.nealio.testlogin.authorization.RestClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Arrays;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Created by ndw6152 on 4/9/2017.
@@ -74,8 +82,10 @@ public class LoginActivity extends AppCompatActivity {
                 request.setParameters(parameters);
                 request.executeAsync();
 
-                onSuccessLaunchMainScreen();
 
+                getUserToken(loginResult.getAccessToken());
+
+                ///onSuccessLaunchMainScreen();
             }
 
             @Override
@@ -88,6 +98,37 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, "FB error" + exception.toString());
             }
         });
+    }
+
+    private Callback getUserTokenCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            e.printStackTrace();
+        }
+
+        @Override
+        public void onResponse(Call call, final Response response) throws IOException {
+            if (!response.isSuccessful()) {
+                throw new IOException("Unexpected code " + response);
+            } else {
+//                Headers responseHeaders = response.headers();
+//                for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+//                    Log.i(TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
+//                }
+                Log.i(TAG, response.message());
+                Log.i(TAG, response.body().string());
+            }
+        }
+    };
+
+    public void getUserToken(AccessToken username) {
+
+        JsonObject json = new JsonObject();
+        json.addProperty("username", username.getToken());
+        json.addProperty("password", "none");
+
+        String url = "http://192.168.1.4:5000/mobilemechanic/api/v1.0/auth";
+        RestClient.post(url, json.toString(), getUserTokenCallback);
     }
 
     public void onSuccessLaunchMainScreen() {
@@ -105,10 +146,39 @@ public class LoginActivity extends AppCompatActivity {
         initFacebookLoginButton();
 
         AccessToken token = AccessToken.getCurrentAccessToken();
+
+        getUserTokenCallback = new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    Log.e(TAG, response.message());
+
+                    LoginManager.getInstance().logOut();
+                }
+                else {
+//                Headers responseHeaders = response.headers();
+//                for (int i = 0, size = responseHeaders.size(); i < size; i++) {
+//                    Log.i(TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
+//                }
+
+                    Log.i(TAG, response.message());
+                    Log.i(TAG, response.body().string());
+
+                    onSuccessLaunchMainScreen();
+                }
+            }
+        };
+
         if (token != null) {
             Toast.makeText(getApplicationContext(), "Token still valid", Toast.LENGTH_SHORT).show();
-            onSuccessLaunchMainScreen();
+            // onSuccessLaunchMainScreen();
         }
+
 
     }
 }

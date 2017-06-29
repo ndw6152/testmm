@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
+ *
  * Created by ndw6152 on 5/9/2017.
  */
 
@@ -14,7 +15,7 @@ public class RestClient {
 
     private static String TAG = "RestClient";
     private static OkHttpClient client = new OkHttpClient();
-    static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
+    static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public static void get(String url, Callback responseCallback) {
         Request request = new Request.Builder()
@@ -26,7 +27,7 @@ public class RestClient {
     public static void post(final String url, String postBody, Callback responseCallback) {
         Request request = new Request.Builder()
                 .url(url)
-                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, postBody))
+                .post(RequestBody.create(JSON, postBody))
                 .build();
         client.newCall(request).enqueue(responseCallback);
     }
