@@ -12,7 +12,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -37,7 +36,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private String TAG = "LoginScreen";
     private CallbackManager mFBcallbackManager;
+    private Callback getUserTokenCallback;
 
+    private void showToast(final String message) {
+        runOnUiThread (new Thread(new Runnable() {
+            public void run() {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -83,9 +91,8 @@ public class LoginActivity extends AppCompatActivity {
                 request.executeAsync();
 
 
-                getUserToken(loginResult.getAccessToken());
+                getUserJWToken(loginResult.getAccessToken());
 
-                ///onSuccessLaunchMainScreen();
             }
 
             @Override
@@ -96,44 +103,26 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 Log.e(TAG, "FB error" + exception.toString());
+                showToast("FB " + exception.getMessage());
             }
         });
     }
 
-    private Callback getUserTokenCallback = new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
-            e.printStackTrace();
-        }
 
-        @Override
-        public void onResponse(Call call, final Response response) throws IOException {
-            if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code " + response);
-            } else {
-//                Headers responseHeaders = response.headers();
-//                for (int i = 0, size = responseHeaders.size(); i < size; i++) {
-//                    Log.i(TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
-//                }
-                Log.i(TAG, response.message());
-                Log.i(TAG, response.body().string());
-            }
-        }
-    };
 
-    public void getUserToken(AccessToken username) {
+    public void getUserJWToken(AccessToken token) {
 
         JsonObject json = new JsonObject();
-        json.addProperty("username", username.getToken());
+        json.addProperty("username", token.getToken());
         json.addProperty("password", "none");
 
         String url = "http://192.168.1.4:5000/mobilemechanic/api/v1.0/auth";
         RestClient.post(url, json.toString(), getUserTokenCallback);
     }
 
-    public void onSuccessLaunchMainScreen() {
+    public void onSuccessLaunchMainScreen(Bundle bundle) {
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        startActivity(intent, bundle);
         finish();
     }
 
@@ -156,20 +145,27 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    Log.e(TAG, response.message());
-
+                    Log.e(TAG, "Code = " + response.code() + " " + response.message());
+                    showToast("Error " + response.code());
                     LoginManager.getInstance().logOut();
                 }
                 else {
-//                Headers responseHeaders = response.headers();
-//                for (int i = 0, size = responseHeaders.size(); i < size; i++) {
-//                    Log.i(TAG, responseHeaders.name(i) + ": " + responseHeaders.value(i));
-//                }
-
                     Log.i(TAG, response.message());
-                    Log.i(TAG, response.body().string());
+                    Log.i("WHAT", response.body().string());
+                    Bundle bundle = new Bundle();
 
-                    onSuccessLaunchMainScreen();
+                    try {
+                        JSONObject jObject = new JSONObject(response.body().string());
+                        String jwtToken = jObject.getString("access_token");
+
+                        bundle.putString("token", jwtToken);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                    onSuccessLaunchMainScreen(bundle);
                 }
             }
         };
@@ -177,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
         if (token != null) {
             Toast.makeText(getApplicationContext(), "Token still valid", Toast.LENGTH_SHORT).show();
             // onSuccessLaunchMainScreen();
+            getUserJWToken(token);
         }
 
 
