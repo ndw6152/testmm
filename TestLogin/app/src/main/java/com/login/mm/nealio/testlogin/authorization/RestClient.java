@@ -1,5 +1,8 @@
 package com.login.mm.nealio.testlogin.authorization;
 
+import com.facebook.AccessToken;
+import com.google.gson.JsonObject;
+
 import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -30,6 +33,15 @@ public class RestClient {
                 .post(RequestBody.create(JSON, postBody))
                 .build();
         client.newCall(request).enqueue(responseCallback);
+    }
+
+    public static void getUserJWToken(AccessToken fbToken, String backEndURL, Callback responseCallback) {
+        JsonObject json = new JsonObject();
+        json.addProperty("username", fbToken.getToken());
+        json.addProperty("password", "none");
+
+        String url = "http://192.168.1.4:5000/mobilemechanic/api/v1.0/auth";
+        RestClient.post(url, json.toString(), responseCallback);
     }
 
 

@@ -90,9 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 request.setParameters(parameters);
                 request.executeAsync();
 
-
-                getUserJWToken(loginResult.getAccessToken());
-
+                RestClient.getUserJWToken(loginResult.getAccessToken(), "", getUserTokenCallback);
             }
 
             @Override
@@ -108,21 +106,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
-    public void getUserJWToken(AccessToken token) {
-
-        JsonObject json = new JsonObject();
-        json.addProperty("username", token.getToken());
-        json.addProperty("password", "none");
-
-        String url = "http://192.168.1.4:5000/mobilemechanic/api/v1.0/auth";
-        RestClient.post(url, json.toString(), getUserTokenCallback);
-    }
-
     public void onSuccessLaunchMainScreen(Bundle bundle) {
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent, bundle);
+        intent.putExtras(bundle);
+        startActivity(intent);
         finish();
     }
 
@@ -151,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     Log.i(TAG, response.message());
-                    Log.i("WHAT", response.body().string());
                     Bundle bundle = new Bundle();
 
                     try {
@@ -163,8 +149,6 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-
-
                     onSuccessLaunchMainScreen(bundle);
                 }
             }
@@ -172,8 +156,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (token != null) {
             Toast.makeText(getApplicationContext(), "Token still valid", Toast.LENGTH_SHORT).show();
-            // onSuccessLaunchMainScreen();
-            getUserJWToken(token);
+            RestClient.getUserJWToken(token, "", getUserTokenCallback);
         }
 
 
